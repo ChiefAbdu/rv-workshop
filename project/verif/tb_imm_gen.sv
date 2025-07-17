@@ -7,7 +7,7 @@
 // RISC-V Immediate Generator Testbench
 // =============================================================================
 
-module tb_immgen;
+module tb_imm_gen;
 
     logic [31:0] instruction;
     logic [2:0] imm_src;
@@ -15,7 +15,7 @@ module tb_immgen;
 
     int passed = 0, failed = 0, total = 0;
 
-    immgen dut (
+    imm_gen dut (
         .instruction(instruction),
         .imm_src(imm_src),
         .imm_ext(imm_ext)
@@ -46,11 +46,11 @@ module tb_immgen;
     initial begin
         $display("=== IMMGEN Testbench Start ===");
 
-        run_test(32'hFFF12383, 3'b000, 32'hFFFFF123, "I-type (sign-ext)");
-        run_test(32'h00F12323, 3'b001, 32'h00000F12, "S-type (store offset)");
-        run_test(32'hFE512EE3, 3'b010, 32'hFFFFFFE4, "B-type (branch offset)");
+        run_test(32'hFFF12383, 3'b000, 32'hFFFFFFFF, "I-type (sign-ext)");
+        run_test(32'h00F12323, 3'b001, 32'h00000006, "S-type (store offset)");
+        run_test(32'hFE512EE3, 3'b010, 32'hFFFFFFFC, "B-type (branch offset)");
         run_test(32'h12345037, 3'b011, 32'h12345000, "U-type (LUI)");
-        run_test(32'hFFF0016F, 3'b100, 32'hFFFFF000, "J-type (JAL)");
+        run_test(32'hFFF0016F, 3'b100, 32'hFFF00FFE, "J-type (JAL)");
         run_test(32'h00000000, 3'b111, 32'h00000000, "Default imm");
 
         $display("=== IMMGEN Summary ===");
