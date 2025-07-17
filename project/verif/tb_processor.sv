@@ -7,14 +7,14 @@
 // RISCV Processor Full-System Testbench
 // =============================================================================
 
-module tb_riscv_processor;
+module tb_processor;
 
     logic clk, reset;
     wire [31:0] pc_out, instruction_out;
 
     int passed = 0, failed = 0, total = 0;
 
-    riscv_processor dut (
+    processor dut (
         .clk(clk),
         .reset(reset),
         .pc_out(pc_out),

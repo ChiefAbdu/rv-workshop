@@ -7,7 +7,7 @@
 // RISC-V Control Unit Testbench (With Result Checking)
 // =============================================================================
 
-module tb_control;
+module tb_controller;
 
     // Inputs
     logic [6:0] opcode;
@@ -27,7 +27,7 @@ module tb_control;
     int total = 0, passed = 0, failed = 0;
 
     // Instantiate DUT
-    control dut (
+    controller dut (
         .opcode(opcode),
         .funct3(funct3),
         .funct7(funct7),
@@ -83,19 +83,19 @@ module tb_control;
     initial begin
         $display("=== Control Unit Testbench Start ===");
 
-        run_test(7'b0110011, 3'b000, 7'b0000000, 1, 3'b000, 0, 0, 0, 0, 0, 0, 4'b0000, "R-type ADD");
-        run_test(7'b0110011, 3'b000, 7'b0100000, 1, 3'b000, 0, 0, 0, 0, 0, 0, 4'b0001, "R-type SUB");
-        run_test(7'b0110011, 3'b111, 7'b0000000, 1, 3'b000, 0, 0, 0, 0, 0, 0, 4'b0010, "R-type AND");
+        run_test(7'b0110011, 3'b000, 7'b0000000, 1, 3'b000, 0, 0, 0, 0, 0, 4'b0000, "R-type ADD");
+        run_test(7'b0110011, 3'b000, 7'b0100000, 1, 3'b000, 0, 0, 0, 0, 0, 4'b0001, "R-type SUB");
+        run_test(7'b0110011, 3'b111, 7'b0000000, 1, 3'b000, 0, 0, 0, 0, 0, 4'b1001, "R-type AND");
 
-        run_test(7'b0010011, 3'b000, 7'b0000000, 1, 3'b000, 1, 0, 0, 0, 0, 0, 4'b0000, "I-type ADDI");
-        run_test(7'b0010011, 3'b101, 7'b0100000, 1, 3'b000, 1, 0, 0, 0, 0, 0, 4'b0111, "I-type SRAI");
-        run_test(7'b0010011, 3'b011, 7'b0000000, 1, 3'b000, 1, 0, 0, 0, 0, 0, 4'b1001, "I-type SLTIU");
+        run_test(7'b0010011, 3'b000, 7'b0000000, 1, 3'b000, 1, 0, 0, 0, 0, 4'b0000, "I-type ADDI");
+        run_test(7'b0010011, 3'b101, 7'b0100000, 1, 3'b000, 1, 0, 0, 0, 0, 4'b0111, "I-type SRAI");
+        run_test(7'b0010011, 3'b011, 7'b0000000, 1, 3'b000, 1, 0, 0, 0, 0, 4'b0100, "I-type SLTIU");
 
-        run_test(7'b0000011, 3'b010, 7'b0000000, 1, 3'b000, 1, 0, 1, 0, 0, 0, 4'b0000, "Load (LW)");
+        run_test(7'b0000011, 3'b010, 7'b0000000, 1, 3'b000, 1, 0, 1, 0, 0, 4'b0000, "Load (LW)");
         run_test(7'b0100011, 3'b010, 7'b0000000, 0, 3'b001, 1, 1, 0, 0, 0, 4'b0000, "Store (SW)");
         run_test(7'b1100011, 3'b000, 7'b0000000, 0, 3'b010, 0, 0, 0, 1, 0, 4'b0001, "Branch (BEQ)");
-        run_test(7'b1101111, 3'b000, 7'b0000000, 1, 3'b100, 0, 0, 0, 0, 1, 4'b0000, "JAL");
-        run_test(7'b0110111, 3'b000, 7'b0000000, 1, 3'b011, 1, 0, 0, 0, 0, 4'b0000, "LUI");
+        run_test(7'b1101111, 3'b000, 7'b0000000, 1, 3'b011, 0, 0, 0, 0, 1, 4'b0000, "JAL");
+        run_test(7'b0110111, 3'b000, 7'b0000000, 1, 3'b100, 1, 0, 0, 0, 0, 4'b1111, "LUI");
 
         run_test(7'b1111111, 3'b000, 7'b0000000, 0, 3'b000, 0, 0, 0, 0, 0, 4'b0000, "NOP/Invalid");
 
