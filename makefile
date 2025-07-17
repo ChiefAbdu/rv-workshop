@@ -6,15 +6,15 @@ BUILD_DIR     := build
 # Files
 # DESIGN_FILES  := $(wildcard $(RTL_DIR)/*.sv)
 # TB_FILES      := $(wildcard $(TB_DIR)/*.sv)
-DESIGN_FILES  := $(wildcard $(RTL_DIR)/imm_gen.sv)
-TB_FILES      := $(wildcard $(TB_DIR)/tb_imm_gen.sv)
+DESIGN_FILES  := $(wildcard $(RTL_DIR)/data_mem.sv)
+TB_FILES      := $(wildcard $(TB_DIR)/tb_data_mem.sv)
 
 # Tools
 VLOG          := vlog
 VSIM          := vsim
 
 # Top module
-TOP_MODULE    := tb_imm_gen
+TOP_MODULE    := tb_data_mem
 
 # Simulation flags (ENABLE VCD DUMPING)
 VSIM_FLAGS    := -c -do "run -all; quit -f" -voptargs="+acc" +vcdfile=$(VCD_FILE)

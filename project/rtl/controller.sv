@@ -41,9 +41,16 @@ module control (
             7'b0110011: begin // R-type (only ADD shown as example)
                 reg_write = 1'b1;
                 case ({funct3, funct7[5]})
-                    4'b0000: alu_control = 4'b0000; // ADD
-                    // TODO: Implement other R-type operations
+                    4'b0000: alu_control = 4'b0000;  // ADD
+
                 endcase
+            7'b0010011:
+            7'b0000011:
+            7'b0100011:
+            7'b1100011:
+            7'b1101111:
+            7'b0110111:
+
             end
 
             // TODO: Implement remaining instruction types:

@@ -7,11 +7,12 @@
 // RISC-V Data Memory Testbench (Enhanced with Checks)
 // =============================================================================
 
-module tb_dmem;
+module tb_data_mem;
 
     // Inputs
     logic clk;
     logic we;
+    logic reset;
     logic [31:0] addr;
     logic [31:0] wdata;
 
@@ -21,9 +22,10 @@ module tb_dmem;
     int total = 0, passed = 0, failed = 0;
 
     // Instantiate DUT
-    dmem dut (
+    data_mem dut (
         .clk(clk),
         .we(we),
+        .reset(reset),
         .addr(addr),
         .wdata(wdata),
         .rdata(rdata)
@@ -53,6 +55,11 @@ module tb_dmem;
         we = 0;
         addr = 0;
         wdata = 0;
+        reset = 1;
+
+        #100;
+        
+        reset = 0;
 
         #10; // Wait for memory init
 
