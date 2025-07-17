@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0, see LICENSE file for details.
 // SPDX-License-Identifier: Apache-2.0
 //
-// Author: Umer Shahid (@umershahidengr)
+// Author: Abdullah Nadeem 
 // =============================================================================
 // Single-Cycle RISC-V Processor - Complete Implementation
 // MEDS Workshop: "Build your own RISC-V Processor in a day"
@@ -31,10 +31,18 @@ module alu (
         // 1001: SLTU (Set Less Than - unsigned)
 
         case (alu_control)
-            4'b0000: result = a + b;              // ADD
-            4'b0001: result = a - b;              // SUB
-            4'b0010: result = a & b;              // AND
-            // TODO: Complete rest of the ALU operations
+            4'b0000: result = a + b;                            // ADD
+            4'b0001: result = a - b;                            // SUB
+            4'b0010: result = a & b;                            // AND
+            4'b0011: result = a | b;                            // OR
+            4'b0100: result = a ^ b;                            // XOR
+            4'b0101: result = a << b;                           // SLL
+            4'b0110: result = a >> b;                           // SRL
+            4'b0111: result = signed'(a) >>> b;                 // SRA
+            4'b1000: if (signed'(a) > signed'(b)) result = 0;   // SLT
+                     else result = 1;  
+            4'b1000: if (a > b) result = 0;                     // SLTU
+                     else result = 1;  
             default: result = 32'h0000_0000;
         endcase
     end

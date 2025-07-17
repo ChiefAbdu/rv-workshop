@@ -2,7 +2,7 @@
 // Licensed under the Apache License, Version 2.0, see LICENSE file for details.
 // SPDX-License-Identifier: Apache-2.0
 //
-// Author: Umer Shahid (@umershahidengr)
+// Author: Abdullah Nadeem (@ChiefAbdu)
 // =============================================================================
 // RISC-V Instruction Memory Testbench
 // =============================================================================
